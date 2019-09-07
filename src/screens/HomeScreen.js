@@ -10,6 +10,7 @@ class HomeScreen extends React.Component {
     render() {
         return (<div className="home-screen">
             <h1>Home</h1>
+            <button onClick={this.props.click}>Click me</button>
         </div>);
     }
 }
@@ -19,7 +20,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        click:()=>dispatch({type:'CLICK'})
+    };
 }
 
 HomeScreen = connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
