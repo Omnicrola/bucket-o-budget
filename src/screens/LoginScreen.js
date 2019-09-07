@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
-class HomeScreen extends React.Component {
+class LoginScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -9,8 +9,8 @@ class HomeScreen extends React.Component {
 
     render() {
         return (<div className="home-screen">
-            <h1>Home</h1>
-            <button onClick={this.props.click}>Click me</button>
+            <h1>Login</h1>
+            <button onClick={this.props.click}>Login</button>
         </div>);
     }
 }
@@ -25,6 +25,6 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-HomeScreen = connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+LoginScreen = connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 
-export {HomeScreen};
+export {LoginScreen};
