@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './styles/App.css';
+import './styles/App.scss';
 import Div100vh from 'react-div-100vh';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {LoginScreen} from "./screens/LoginScreen";
@@ -11,6 +11,7 @@ import {LOAD_APP_DATA, SELECT_SPREADSHEET} from "./actions/ActionTypes";
 import {ChooseSheetScreen} from "./screens/ChooseSheetScreen";
 import LocalStorage from "./util/LocalStorage";
 import {APP_DATA} from "./config/constants";
+import {selectIsAuthenticated} from "./middleware/selectors";
 
 class App extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: selectIsAuthenticated(state)
     };
 }
 

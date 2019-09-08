@@ -1,0 +1,26 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  align-items: center;
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  box-sizing: border-box;
+  overflow: scroll;
+  height: 75vh;
+
+  .date {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+  > * {
+    margin-bottom: .25em;
+    padding: 5px 10px;
+    background: #bacef2;
+  }
+
+}

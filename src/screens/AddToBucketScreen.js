@@ -1,6 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
+import {selectSpreadsheetId} from "../middleware/selectors";
 
 class AddToBucketScreen extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class AddToBucketScreen extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        selectedSheet: state.sheet.id
+        selectedSheet: selectSpreadsheetId(state),
     };
 }
 

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import GAuth from "../g-api/GoogleAuth";
 import {AUTHENTICATION_ERROR, UPDATE_AUTHENTICATION} from "../actions/ActionTypes";
+import {selectAuthError} from "../middleware/selectors";
 
 class LoginScreen extends React.Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class LoginScreen extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        authError: state.auth.error
+        authError: selectAuthError(state)
     };
 }
 
