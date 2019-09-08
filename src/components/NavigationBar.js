@@ -1,8 +1,8 @@
 import React from 'react';
-
+import GoogleAuth from '../g-api/GoogleAuth';
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import {History, Home} from '@material-ui/icons';
+import {History, Home, Close} from '@material-ui/icons';
 import {withRouter} from "react-router-dom";
 
 let NavigationBar = ({history}) => {
@@ -17,6 +17,7 @@ let NavigationBar = ({history}) => {
         >
             <BottomNavigationAction label="Home" onClick={() => history.push('/')} icon={<Home/>}/>
             <BottomNavigationAction label="History" onClick={() => history.push('/history')} icon={<History/>}/>
+            <BottomNavigationAction label="Logout" onClick={() => GoogleAuth.signOut()} icon={<Close/>}/>
         </BottomNavigation>
     );
 };

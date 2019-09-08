@@ -7,7 +7,10 @@ import {AddToBucketScreen} from "./screens/AddToBucketScreen";
 import {NavigationBar} from "./components/NavigationBar";
 import {HistoryScreen} from "./screens/HistoryScreen";
 import {connect} from "react-redux";
-import {INIT_AUTHENTICATION} from "./actions/ActionTypes";
+import {LOAD_APP_DATA, SELECT_SPREADSHEET} from "./actions/ActionTypes";
+import {ChooseSheetScreen} from "./screens/ChooseSheetScreen";
+import LocalStorage from "./util/LocalStorage";
+import {APP_DATA} from "./config/constants";
 
 class App extends Component {
     constructor(props) {
@@ -16,6 +19,10 @@ class App extends Component {
 
     componentDidMount() {
         this.props.initAuth();
+        const data = LocalStorage.get(APP_DATA)
+        if (data) {
+            this.props.selectSpreadsheet(data.spreadsheetId);
+        }
     }
 
     render() {
@@ -23,8 +30,9 @@ class App extends Component {
             <Div100vh>
                 {this.props.isAuthenticated ?
                     <Router>
-                        <Route exact path={'/'} component={HistoryScreen}/>
-                        <Route path={'/add'} component={AddToBucketScreen}/>
+                        <Route exact path={'/'} component={AddToBucketScreen}/>
+                        <Route path={'/history'} component={HistoryScreen}/>
+                        <Route path={'/choose-sheet'} component={ChooseSheetScreen}/>
                         <NavigationBar/>
                     </Router> :
                     <LoginScreen/>
@@ -35,7 +43,6 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state);
     return {
         isAuthenticated: state.auth.isAuthenticated
     };
@@ -43,7 +50,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        initAuth: () => dispatch({type: INIT_AUTHENTICATION})
+        initAuth: () => dispatch({type: LOAD_APP_DATA}),
+        selectSpreadsheet: (id) => dispatch({type: SELECT_SPREADSHEET, payload: {id}}),
     };
 }
 
