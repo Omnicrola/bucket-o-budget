@@ -2,16 +2,22 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {selectSpreadsheetId} from "../middleware/selectors";
+import GoogleSheets from "../g-api/GoogleSheets";
 
-class AddToBucketScreen extends React.Component {
+class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            data: {}
+        };
     }
 
     componentDidMount() {
-        if (!this.props.selectedSheet) {
+        if (!this.props.spreadsheetId) {
             this.props.history.push('/choose-sheet')
+        } else {
+            GoogleSheets.getBucketBudget(this.props.spreadsheetId)
+                .then(data => this.setState({data}));
         }
     }
 
@@ -19,7 +25,7 @@ class AddToBucketScreen extends React.Component {
         return (
             <div className="screen">
                 <h1>Add Entry</h1>
-                {this.props.selectedSheet}
+                {JSON.stringify(this.state.data)}
             </div>
         );
     }
@@ -28,15 +34,13 @@ class AddToBucketScreen extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        selectedSheet: selectSpreadsheetId(state),
+        spreadsheetId: selectSpreadsheetId(state),
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        click: () => dispatch({type: 'CLICK'})
-    };
+    return {};
 }
 
-AddToBucketScreen = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddToBucketScreen));
-export {AddToBucketScreen};
+HomeScreen = withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeScreen));
+export {HomeScreen};

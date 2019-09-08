@@ -3,7 +3,7 @@ import './styles/App.scss';
 import Div100vh from 'react-div-100vh';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {LoginScreen} from "./screens/LoginScreen";
-import {AddToBucketScreen} from "./screens/AddToBucketScreen";
+import {HomeScreen} from "./screens/HomeScreen";
 import {NavigationBar} from "./components/NavigationBar";
 import {HistoryScreen} from "./screens/HistoryScreen";
 import {connect} from "react-redux";
@@ -31,7 +31,7 @@ class App extends Component {
             <Div100vh>
                 {this.props.isAuthenticated ?
                     <Router>
-                        <Route exact path={'/'} component={AddToBucketScreen}/>
+                        <Route exact path={'/'} component={HomeScreen}/>
                         <Route path={'/history'} component={HistoryScreen}/>
                         <Route path={'/choose-sheet'} component={ChooseSheetScreen}/>
                         <NavigationBar/>

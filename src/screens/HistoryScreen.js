@@ -5,7 +5,7 @@ import {selectSpreadsheetId} from "../middleware/selectors";
 import {Fragment} from "react";
 
 
-function formatDate(date){
+function formatDate(date) {
     return `${date.getUTCMonth()}-${date.getUTCDate()}-${date.getUTCFullYear()}`;
 }
 
@@ -28,19 +28,8 @@ class HistoryScreen extends React.Component {
     }
 
     componentDidMount() {
-        GoogleSheets.getSpreadsheet(this.props.spreadsheetId, 'A4:C250')
-            .then(response => {
-                const entries = response.result.values
-                    .reverse()
-                    .map(row => {
-                        return {
-                            amount: row[0],
-                            date: new Date(row[1]),
-                            note: row[2]
-                        };
-                    });
-                this.setState({entries})
-            });
+        GoogleSheets.getBucketHistory(this.props.spreadsheetId)
+            .then(entries => this.setState({entries}));
     }
 
     render() {
