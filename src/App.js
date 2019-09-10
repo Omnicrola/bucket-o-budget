@@ -12,6 +12,9 @@ import {ChooseSheetScreen} from "./screens/ChooseSheetScreen";
 import LocalStorage from "./util/LocalStorage";
 import {APP_DATA} from "./config/constants";
 import {selectIsAuthenticated} from "./middleware/selectors";
+import MomentUtils from '@date-io/moment';
+import {MuiPickersUtilsProvider} from '@material-ui/pickers'
+
 
 class App extends Component {
     constructor(props) {
@@ -29,15 +32,17 @@ class App extends Component {
     render() {
         return (
             <Div100vh>
-                {this.props.isAuthenticated ?
-                    <Router>
-                        <Route exact path={'/'} component={HomeScreen}/>
-                        <Route path={'/history'} component={HistoryScreen}/>
-                        <Route path={'/choose-sheet'} component={ChooseSheetScreen}/>
-                        <NavigationBar/>
-                    </Router> :
-                    <LoginScreen/>
-                }
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                    {this.props.isAuthenticated ?
+                        <Router>
+                            <Route exact path={'/'} component={HomeScreen}/>
+                            <Route path={'/history'} component={HistoryScreen}/>
+                            <Route path={'/choose-sheet'} component={ChooseSheetScreen}/>
+                            <NavigationBar/>
+                        </Router> :
+                        <LoginScreen/>
+                    }
+                </MuiPickersUtilsProvider>
             </Div100vh>
         );
     }

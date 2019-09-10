@@ -9,3 +9,4 @@ export const AUTHENTICATION_ERROR = 'auth/error';
 
 // sheets
 export const SELECT_SPREADSHEET = 'sheets/select';
+export const ADD_BUDGET_ENTRY = 'sheets/add-budget-entry';
